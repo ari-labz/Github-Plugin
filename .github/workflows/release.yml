@@ -1,0 +1,16 @@
+# Tag a version (git tag v1.0.0 && git push --tags) and this builds github.ari and attaches it to the release.
+name: Release
+on:
+  push:
+    tags: ["v*"]
+jobs:
+  release:
+    uses: ari-labz/A.R.I-Plugins/.github/workflows/release-plugin.yml@main
+    permissions: { contents: write }
+    with:
+      id: github
+      name: GitHub
+      description: "Gives Ari your GitHub account for issues, pull requests, releases and Actions, through GitHub's own CLI."
+      author: first-party
+      project: ARI.Plugin.GitHub.csproj
+      entry: ARI.Plugin.GitHub.dll

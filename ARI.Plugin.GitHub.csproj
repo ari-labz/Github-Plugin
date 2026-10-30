@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>ARI.Plugin.GitHub</AssemblyName>
+    <RootNamespace>ARI.Plugins.GitHub</RootNamespace>
+    <!-- Where ARI's source is checked out. Next to this repo by default; pass -p:AriHost=... to point elsewhere. -->
+    <AriHost Condition="'$(AriHost)' == ''">$(MSBuildThisFileDirectory)../A.R.I/Server</AriHost>
+  </PropertyGroup>
+
+  <!-- The plugin's own source ships inside it, so the plugin page can show it. -->
+  <ItemGroup>
+    <EmbeddedResource Include="*.cs" LogicalName="source/%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(AriHost)/ARI.LLM/ARI.LLM.csproj"><Private>false</Private></ProjectReference>
+    <ProjectReference Include="$(AriHost)/ARI.Common/ARI.Common.csproj"><Private>false</Private></ProjectReference>
+  </ItemGroup>
+
+</Project>
